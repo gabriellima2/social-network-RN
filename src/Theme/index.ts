@@ -9,7 +9,7 @@ export const darkTheme = {
 		fontMain: "#F6F6F6",
 		fontContrast: "#101010",
 	},
-	logo: require("../../assets/logo/dark-logo.jpg"),
+	logo: require("../../assets/logo/light-logo.png"),
 };
 
 export const lightTheme = {
@@ -24,7 +24,7 @@ export const lightTheme = {
 		fontContrast: "#F6F6F6",
 	},
 
-	logo: require("../../assets/logo/light-logo.jpg"),
+	logo: require("../../assets/logo/dark-logo.png"),
 };
 
 export const Theme = {
@@ -49,15 +49,20 @@ export const Theme = {
 		mainBold: "JostBold",
 	},
 	fontSize: {
-		1: "1rem",
-		2: "1.2rem",
-		3: "1.4rem",
-		4: "1.6rem",
-		5: "1.8rem",
-		6: "2rem",
-		7: "2.2rem",
-		8: "2.4rem",
-		9: "2.6rem",
-		10: "2.8rem",
+		1: "4px",
+		2: "8px",
+		3: "12px",
+		4: "16px",
+		5: "20px",
+		6: "24px",
+		7: "28px",
+		8: "32px",
+		9: "36px",
+		10: "40px",
+		11: "44px",
+		12: "48px",
+		13: "52px",
+		14: "56px",
+		15: "60px",
 	},
 };
