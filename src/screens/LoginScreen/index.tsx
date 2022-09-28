@@ -1,29 +1,18 @@
 import { SafeAreaView } from "react-native";
 import { StatusBar } from "expo-status-bar";
-import { useState } from "react";
 
+import { KeyboardAvoidingWrapper } from "../../components/KeyboardAvoidingWrapper";
+import { TextField } from "../../components/Inputs/TextField";
+import { AuthForm } from "../../components/AuthForm";
 import { Logo } from "../../components/Infra/Logo";
 import { Title } from "../../components/Title";
-import { AuthForm } from "../../components/AuthForm";
-import { TextField } from "../../components/Inputs/TextField";
+
+import { useAuthLoginContext } from "../../contexts/AuthLoginContext";
 
 import { Container, FormContainer, Content, Small } from "./styles";
-import { Theme } from "../../Theme";
-import { KeyboardAvoidingWrapper } from "../../components/KeyboardAvoidingWrapper";
-
-interface LoginCredentials {
-	username: string;
-	password: string;
-}
 
 export const LoginScreen = () => {
-	const [loginCredentials, setLoginCredentials] = useState(
-		{} as LoginCredentials
-	);
-
-	const handleChange = (name: string, text: string) => {
-		setLoginCredentials((prevState) => ({ ...prevState, [name]: text }));
-	};
+	const { handleInputChange, handleSubmit } = useAuthLoginContext();
 
 	return (
 		<KeyboardAvoidingWrapper>
@@ -36,15 +25,15 @@ export const LoginScreen = () => {
 					<FormContainer>
 						<Title>Faça Login</Title>
 
-						<AuthForm variants="signIn">
+						<AuthForm variants="signIn" handleSubmit={handleSubmit}>
 							<Content>
 								<TextField
 									placeholder="Usuário"
-									onChangeText={(text) => handleChange("username", text)}
+									onChangeText={(text) => handleInputChange("username", text)}
 								/>
 								<TextField
 									placeholder="Senha"
-									onChangeText={(text) => handleChange("password", text)}
+									onChangeText={(text) => handleInputChange("password", text)}
 								/>
 								<Small>Esqueceu a senha?</Small>
 							</Content>

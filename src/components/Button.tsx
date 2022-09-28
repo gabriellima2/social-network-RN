@@ -9,6 +9,7 @@ interface StylesProps {
 
 interface ButtonProps extends StylesProps {
 	children: ReactNode;
+	onPress?: () => void;
 }
 
 const Container = styled.TouchableOpacity<StylesProps>`
@@ -32,7 +33,7 @@ const Text = styled.Text<StylesProps>`
 `;
 
 export const Button = ({ children, ...props }: ButtonProps) => (
-	<Container isAccent={props.isAccent}>
+	<Container isAccent={props.isAccent} onPress={props.onPress}>
 		<Text isAccent={props.isAccent}>{children}</Text>
 	</Container>
 );

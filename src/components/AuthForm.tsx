@@ -8,6 +8,7 @@ import { Theme } from "../Theme";
 interface AuthFormProps {
 	variants: "signIn" | "signUp";
 	children: ReactNode;
+	handleSubmit: () => void;
 }
 
 const Container = styled.View`
@@ -21,7 +22,7 @@ export const AuthForm = ({ variants, children, ...props }: AuthFormProps) => {
 		<Container>
 			{children}
 
-			<Button isAccent={true}>
+			<Button isAccent={true} onPress={props.handleSubmit}>
 				{variants === "signIn" ? "Entrar" : "Criar Conta"}
 			</Button>
 			<Button isAccent={false}>

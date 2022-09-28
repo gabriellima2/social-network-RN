@@ -4,6 +4,7 @@ import { ThemeProvider } from "styled-components";
 
 import { Routes } from "./src/Routes";
 import { Theme } from "./src/Theme";
+import { AuthLoginContextProvider } from "./src/contexts/AuthLoginContext";
 
 export default function App() {
 	const [fontsLoaded] = useFonts({
@@ -17,7 +18,9 @@ export default function App() {
 
 	return (
 		<ThemeProvider theme={Theme}>
-			<Routes />
+			<AuthLoginContextProvider>
+				<Routes />
+			</AuthLoginContextProvider>
 		</ThemeProvider>
 	);
 }
