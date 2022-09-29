@@ -54,7 +54,6 @@ export const AuthLoginContextProvider = ({
 	};
 
 	const fieldsAreValid = () => {
-		console.log(authLoginData);
 		if (!authLoginData.username) {
 			addAuthError({
 				username: "O campo usuário é obrigatório",
