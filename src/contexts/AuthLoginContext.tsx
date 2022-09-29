@@ -1,4 +1,4 @@
-import { createContext, useState, useContext } from "react";
+import { createContext, useState, useContext, useEffect } from "react";
 import type { ReactNode } from "react";
 
 import type { AuthError, AuthLoginData } from "../types";
@@ -18,6 +18,9 @@ interface AuthLoginContextProperties {
 interface AuthLoginContextProviderProps {
 	children: ReactNode;
 }
+
+const PASSWORD_MIN_CHAR = 8;
+const USERNAME_MIN_CHAR = 12;
 
 export const AuthLoginContext = createContext({} as AuthLoginContextProperties);
 
@@ -51,6 +54,7 @@ export const AuthLoginContextProvider = ({
 	};
 
 	const fieldsAreValid = () => {
+		console.log(authLoginData);
 		if (!authLoginData.username) {
 			addAuthError({
 				username: "O campo usuário é obrigatório",
@@ -69,18 +73,18 @@ export const AuthLoginContextProvider = ({
 			return false;
 		}
 
-		if (authLoginData.password.length < 8) {
+		if (authLoginData.password.length < PASSWORD_MIN_CHAR) {
 			addAuthError({
 				username: null,
-				password: "A senha deve ter no minímo 8 caracteres",
+				password: `A senha deve ter no minímo ${PASSWORD_MIN_CHAR} caracteres`,
 			});
 
 			return false;
 		}
 
-		if (authLoginData.username.length > 12) {
+		if (authLoginData.username.length > USERNAME_MIN_CHAR) {
 			addAuthError({
-				username: "O usuário deve ter no máximo 12 caracteres",
+				username: `O usuário deve ter no máximo ${USERNAME_MIN_CHAR} caracteres`,
 				password: null,
 			});
 
@@ -101,6 +105,13 @@ export const AuthLoginContextProvider = ({
 
 		clearAuthData();
 	};
+
+	useEffect(() => {
+		return () => {
+			clearAuthData();
+			clearAuthErrors();
+		};
+	}, []);
 
 	return (
 		<AuthLoginContext.Provider
