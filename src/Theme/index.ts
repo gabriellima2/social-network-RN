@@ -5,6 +5,7 @@ export const darkTheme = {
 
 		main: "#F6F6F6",
 		util: "#5F5F5F",
+		details: "#252525",
 
 		fontMain: "#F6F6F6",
 		fontContrast: "#101010",
@@ -19,6 +20,7 @@ export const lightTheme = {
 
 		main: "#101010",
 		util: "#898989",
+		details: "#D6D6D6",
 
 		fontMain: "#101010",
 		fontContrast: "#F6F6F6",

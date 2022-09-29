@@ -1,13 +1,14 @@
 import type { TextInputProps } from "react-native";
 import styled from "styled-components/native";
 
+import type { Error } from "../../types";
 import { Theme } from "../../Theme";
-
-interface TextFieldProps extends TextInputProps {}
 
 const Container = styled.ScrollView`
 	width: 100%;
 	margin-bottom: ${Theme.space[4]};
+
+	position: relative;
 `;
 
 const Input = styled.TextInput`
@@ -18,18 +19,33 @@ const Input = styled.TextInput`
 
 	font-size: ${Theme.fontSize[4]};
 
-	border-bottom-color: ${Theme.colors.util};
+	border-bottom-width: 2px;
+	border-bottom-color: ${Theme.colors.details};
 
 	background: ${Theme.colors.contrast};
 `;
 
-export const TextField = (props: TextFieldProps) => (
+export const ErrorText = styled.Text`
+	text-align: center;
+	color: red;
+	font-weight: 400;
+	font-size: ${Theme.fontSize[3]};
+
+	margin-top: ${Theme.space[2]};
+`;
+
+interface TextFieldProps extends TextInputProps {
+	errorMessage?: Error;
+}
+
+export const TextField = ({ errorMessage, ...props }: TextFieldProps) => (
 	<Container>
 		<Input {...props} />
+		{errorMessage && <ErrorText>{errorMessage}</ErrorText>}
 	</Container>
 );
 
-const defaultProps: TextFieldProps = {
+const defaultProps: Omit<TextFieldProps, "errorMesssage"> = {
 	keyboardType: "default",
 };
 

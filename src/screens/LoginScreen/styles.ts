@@ -20,5 +20,6 @@ export const Content = styled.View`
 
 export const Small = styled.Text`
 	color: ${Theme.colors.util};
-	margin-top: ${Theme.space[4]};
+	font-family: ${Theme.fonts.mainRegular};
+	margin-top: ${Theme.space[2]};
 `;

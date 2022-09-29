@@ -12,7 +12,8 @@ import { useAuthLoginContext } from "../../contexts/AuthLoginContext";
 import { Container, FormContainer, Content, Small } from "./styles";
 
 export const LoginScreen = () => {
-	const { handleInputChange, handleSubmit } = useAuthLoginContext();
+	const { handleInputChange, handleSubmit, authInformation } =
+		useAuthLoginContext();
 
 	return (
 		<KeyboardAvoidingWrapper>
@@ -29,12 +30,21 @@ export const LoginScreen = () => {
 							<Content>
 								<TextField
 									placeholder="Usuário"
+									maxLength={12}
 									onChangeText={(text) => handleInputChange("username", text)}
+									errorMessage={authInformation.errors?.username}
+									underlineColorAndroid="transparent"
 								/>
+
 								<TextField
+									secureTextEntry
 									placeholder="Senha"
+									autoCorrect={false}
 									onChangeText={(text) => handleInputChange("password", text)}
+									errorMessage={authInformation.errors?.password}
+									underlineColorAndroid="transparent"
 								/>
+
 								<Small>Esqueceu a senha?</Small>
 							</Content>
 						</AuthForm>
