@@ -11,6 +11,10 @@ interface KeyboardAvoidingWrapperProps {
 	children: ReactNode;
 }
 
+/*
+Teclado não sobrepor o elemento, habilitamos scroll para view e
+quando clicar fora do teclado fecha ele.
+*/
 export const KeyboardAvoidingWrapper = ({
 	children,
 	...props
