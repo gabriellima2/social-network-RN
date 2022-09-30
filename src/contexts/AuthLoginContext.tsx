@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 
 import type { AuthError, AuthLoginData } from "../types";
 import validAuthMock from "../mocks/validAuth.json";
+import { persistData } from "../utils/persistData";
 
 interface AuthInformation extends Pick<AuthLoginData, "username"> {
 	isAuthenticated: boolean;
@@ -11,6 +12,7 @@ interface AuthInformation extends Pick<AuthLoginData, "username"> {
 
 interface AuthLoginContextProperties {
 	authInformation: AuthInformation;
+	isLoading: boolean;
 	handleInputChange: (name: string, text: string) => void;
 	handleSubmit: () => void;
 }
@@ -21,14 +23,16 @@ interface AuthLoginContextProviderProps {
 
 const PASSWORD_MIN_CHAR = 8;
 const USERNAME_MIN_CHAR = 12;
+const STORAGE_KEY_AUTH = "isLogged";
 
 export const AuthLoginContext = createContext({} as AuthLoginContextProperties);
 
 export const AuthLoginContextProvider = ({
 	children,
 }: AuthLoginContextProviderProps) => {
-	const [authLoginData, setAuthLoginData] = useState({} as AuthLoginData);
 	const [authInformation, setAuthInformation] = useState({} as AuthInformation);
+	const [authLoginData, setAuthLoginData] = useState({} as AuthLoginData);
+	const [isLoading, setIsLoading] = useState<boolean>(true);
 
 	const clearAuthErrors = () => setAuthInformation({} as AuthInformation);
 
@@ -93,19 +97,41 @@ export const AuthLoginContextProvider = ({
 		return true;
 	};
 
-	const handleSubmit = () => {
-		if (!fieldsAreValid() || !userExist()) return;
-
-		setAuthInformation({
+	const addLoggedUser = () => {
+		const auth = {
 			username: authLoginData.username,
 			isAuthenticated: true,
 			errors: undefined,
-		});
+		};
 
+		setAuthInformation(auth);
+
+		persistData.set(STORAGE_KEY_AUTH, auth);
+	};
+
+	const getLoggedUserStored = () => {
+		persistData
+			.get(STORAGE_KEY_AUTH)
+			.then((response) => {
+				if (response) return setAuthInformation(response);
+
+				setAuthInformation({} as AuthInformation);
+			})
+			.catch((err) => setAuthInformation({} as AuthInformation));
+
+		setIsLoading(false);
+	};
+
+	const handleSubmit = () => {
+		if (!fieldsAreValid() || !userExist()) return;
+
+		addLoggedUser();
 		clearAuthData();
 	};
 
 	useEffect(() => {
+		getLoggedUserStored();
+
 		return () => {
 			clearAuthData();
 			clearAuthErrors();
@@ -114,7 +140,12 @@ export const AuthLoginContextProvider = ({
 
 	return (
 		<AuthLoginContext.Provider
-			value={{ authInformation, handleInputChange, handleSubmit }}
+			value={{
+				authInformation,
+				isLoading,
+				handleInputChange,
+				handleSubmit,
+			}}
 		>
 			{children}
 		</AuthLoginContext.Provider>
