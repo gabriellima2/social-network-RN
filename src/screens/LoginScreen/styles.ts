@@ -12,6 +12,8 @@ export const Container = styled.View`
 export const FormContainer = styled.View`
 	width: 100%;
 	align-items: center;
+
+	padding-top: ${Theme.space[8]};
 `;
 
 export const Content = styled.View`

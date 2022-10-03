@@ -5,7 +5,6 @@ import { KeyboardAvoidingWrapper } from "../../components/KeyboardAvoidingWrappe
 import { TextField } from "../../components/Inputs/TextField";
 import { AuthForm } from "../../components/AuthForm";
 import { Logo } from "../../components/Infra/Logo";
-import { Title } from "../../components/Title";
 
 import { useAuthLoginContext } from "../../contexts/AuthLoginContext";
 
@@ -24,8 +23,6 @@ export const LoginScreen = () => {
 					<Logo />
 
 					<FormContainer>
-						<Title>Faça Login</Title>
-
 						<AuthForm variants="signIn" handleSubmit={handleSubmit}>
 							<Content>
 								<TextField
