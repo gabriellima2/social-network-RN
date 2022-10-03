@@ -121,13 +121,12 @@ export const AuthLoginContextProvider = ({
 		persistData
 			.get(STORAGE_KEY_AUTH)
 			.then((response) => {
-				if (response) return setAuthInformation(response);
+				if (!response) return setAuthInformation({} as AuthInformation);
 
-				setAuthInformation({} as AuthInformation);
+				setAuthInformation(response);
+				setIsLoading(false);
 			})
 			.catch((err) => setAuthInformation({} as AuthInformation));
-
-		setIsLoading(false);
 	};
 
 	const handleSubmit = () => {
