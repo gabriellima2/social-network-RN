@@ -1,4 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Callback } from "@react-native-async-storage/async-storage/lib/typescript/types";
 
 class PersistedData {
 	async set(key: string, value: unknown) {
@@ -20,6 +21,14 @@ class PersistedData {
 		} catch (err) {
 			console.log(err);
 			return null;
+		}
+	}
+
+	async remove(key: string) {
+		try {
+			await AsyncStorage.removeItem(key);
+		} catch (err) {
+			console.log(err);
 		}
 	}
 }

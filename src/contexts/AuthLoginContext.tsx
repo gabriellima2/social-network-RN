@@ -15,6 +15,7 @@ interface AuthLoginContextProperties {
 	isLoading: boolean;
 	handleInputChange: (name: string, text: string) => void;
 	handleSubmit: () => void;
+	handleLogout: () => void;
 }
 
 interface AuthLoginContextProviderProps {
@@ -34,12 +35,12 @@ export const AuthLoginContextProvider = ({
 	const [authLoginData, setAuthLoginData] = useState({} as AuthLoginData);
 	const [isLoading, setIsLoading] = useState<boolean>(true);
 
-	const clearAuthErrors = () => setAuthInformation({} as AuthInformation);
+	const clearAuthInfo = () => setAuthInformation({} as AuthInformation);
 
 	const clearAuthData = () => setAuthLoginData({} as AuthLoginData);
 
 	const handleInputChange = (name: string, text: string) => {
-		clearAuthErrors();
+		clearAuthInfo();
 		setAuthLoginData((prevState) => ({ ...prevState, [name]: text.trim() }));
 	};
 
@@ -97,6 +98,13 @@ export const AuthLoginContextProvider = ({
 		return true;
 	};
 
+	const handleLogout = () => {
+		persistData.remove(STORAGE_KEY_AUTH);
+
+		clearAuthData();
+		clearAuthInfo();
+	};
+
 	const addLoggedUser = () => {
 		const auth = {
 			username: authLoginData.username,
@@ -134,7 +142,7 @@ export const AuthLoginContextProvider = ({
 
 		return () => {
 			clearAuthData();
-			clearAuthErrors();
+			clearAuthInfo();
 		};
 	}, []);
 
@@ -145,6 +153,7 @@ export const AuthLoginContextProvider = ({
 				isLoading,
 				handleInputChange,
 				handleSubmit,
+				handleLogout,
 			}}
 		>
 			{children}
