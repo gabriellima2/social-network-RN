@@ -1,12 +1,12 @@
 import { SafeAreaView } from "react-native";
 import { StatusBar } from "expo-status-bar";
 
-import { KeyboardAvoidingWrapper } from "../../components/KeyboardAvoidingWrapper";
-import { TextField } from "../../components/Inputs/TextField";
-import { AuthForm } from "../../components/AuthForm";
-import { Logo } from "../../components/Infra/Logo";
+import { KeyboardAvoidingWrapper } from "../../../components/KeyboardAvoidingWrapper";
+import { TextField } from "../../../components/Inputs/TextField";
+import { AuthForm } from "../../../components/AuthForm";
+import { Logo } from "../../../components/Infra/Logo";
 
-import { useAuthLoginContext } from "../../contexts/AuthLoginContext";
+import { useAuthLoginContext } from "../../../contexts/AuthLoginContext";
 
 import { Container, FormContainer, Content, Small } from "./styles";
 

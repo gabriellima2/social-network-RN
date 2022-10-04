@@ -4,10 +4,9 @@ import {
 	NativeStackNavigationOptions,
 } from "@react-navigation/native-stack";
 
+import { TabNavigation } from "./Navigations/TabNavigation";
+import { LoginScreen } from "./screens/Public/LoginScreen";
 import { Loading } from "./components/Infra/Loading";
-
-import { HomeScreen } from "./screens/HomeScreen";
-import { LoginScreen } from "./screens/LoginScreen";
 
 import { useAuthLoginContext } from "./contexts/AuthLoginContext";
 import { Theme } from "./Theme";
@@ -37,7 +36,7 @@ export const Routes = () => {
 				{Object.keys(authInformation).length ? (
 					<Stack.Screen
 						name="Home"
-						component={HomeScreen}
+						component={TabNavigation}
 						options={{ headerShown: false }}
 					/>
 				) : (
