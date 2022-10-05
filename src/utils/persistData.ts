@@ -1,5 +1,4 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { Callback } from "@react-native-async-storage/async-storage/lib/typescript/types";
 
 class PersistedData {
 	async set(key: string, value: unknown) {
@@ -11,7 +10,7 @@ class PersistedData {
 		}
 	}
 
-	async get(key: string) {
+	async get<T>(key: string): Promise<T | null> {
 		try {
 			const value = await AsyncStorage.getItem(key);
 

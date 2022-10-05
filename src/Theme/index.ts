@@ -1,19 +1,5 @@
-export const darkTheme = {
-	colors: {
-		background: "#101010",
-		contrast: "#252525",
-
-		main: "#F6F6F6",
-		util: "#5F5F5F",
-		details: "#252525",
-
-		fontMain: "#F6F6F6",
-		fontContrast: "#101010",
-	},
-	logo: require("../../assets/logo/light-logo.png"),
-};
-
 export const lightTheme = {
+	name: "light",
 	colors: {
 		background: "#F6F6F6",
 		contrast: "#E9E9E9",
@@ -30,8 +16,7 @@ export const lightTheme = {
 };
 
 export const Theme = {
-	colors: { ...lightTheme.colors },
-	logo: lightTheme.logo,
+	...lightTheme,
 	space: {
 		1: "4px",
 		2: "8px",
